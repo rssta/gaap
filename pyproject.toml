@@ -1,0 +1,26 @@
+[project]
+name = "agent-ai"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "demjson3>=3.0.6",
+    "faiss-cpu>=1.15.0",
+    "google>=3.0.0",
+    "google-api-python-client>=2.196.0",
+    "google-auth-oauthlib>=1.4.0",
+    "google-genai>=2.8.0",
+    "mcp>=1.17.0",
+    "node>=1.2.3",
+    "numpy>=2.2.6",
+    "ollama>=0.6.2",
+    "openai>=2.6.0",
+    "python-dotenv>=1.1.1",
+    "requests>=2.32.5",
+    "scipy>=1.15.3",
+    "sentence-transformers>=6.0.0",
+    "sqlite-utils>=3.38",
+    "tiktoken>=0.12.0",
+    "tomlkit>=0.13.3",
+    "tzlocal>=5.3.1",
+    "wikipedia-api>=0.9.0",
+]

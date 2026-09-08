@@ -1,0 +1,15 @@
+Weather: Model Context Protocol. [n. d.]. Building a Server: Weather API Helper
+Functions. Anthropic. https://modelcontextprotocol.io/docs/develop/
+build-server#weather-api-helper-functions-2
+Standard Servers: Model Context Protocol. 2026. Model Context Protocol Servers. https:
+//github.com/modelcontextprotocol/servers/tree/main/src GitHub
+Wikipedia: Rudra-ravi. [n. d.]. wikipedia-mcp. https://github.com/Rudra-ravi/
+wikipedia-mcp. GitHub repository, Accessed: 2026-03-28.
+Health: VitalDB. [n. d.]. medcalc: Medical Calculator in Python. https://github.
+com/vitaldb/medcalc GitHub repository.
+Fruits: pipeworx-io. [n. d.]. mcp-fruityvice: MCP server for fruit nutritional 
+data via Fruityvice API. https://github.com/pipeworx-io/mcp-fruityvice 
+  GitHub repository.
+Email Real: HeurisTech. [n. d.]. gmail-mcp-server: Provides tools for common 
+operations with gmail. https://github.com/HeurisTech/gmail-mcp-server 
+GitHub repository.
