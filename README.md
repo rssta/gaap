@@ -36,14 +36,14 @@ export OPENAI_API_KEY="<add-key-here>"
 export GEMINI_API_KEY="<add-key-here>"
 ```
 
-4. Open `config.py`, and set parameters as desired. You can determine if you would like to use local (OLlama) or remote (OpenAI or Google), and what model you would prefer. 
+4. Define model provider and name in `config.py`, You can determine if you would like to use local (OLlama) or remote (OpenAI or Google), and what model you would prefer. We recommend a relatively large LLM (such as `GPT-5.6-Sol`) for the highest task completion rate, particularly for more complex tasks. Other LLMs (such as `GPT-5.6-Terra`) are capable of operating under GAAP, but may see lower task completion rates for complex tasks. Other configurations can be left at their default. 
 
-5. Execute setup script in the project directory. This setup script will make a single call to your configured LLM to test operationality. You may be prompted how you want to initialize `privateData.db`. If you initialize fresh, it will have no private data to begin. If you initialize with a template, it will have example user private data contained inside. 
+5. Execute setup script in the project directory. **This setup script will make a single API call to your configured LLM to test operationally, which will use a small number of tokens. This step may take up to two minutes, depending on the speed of your chosen LLM.** You may be prompted how you want to initialize `privateData.db`. We recommend the default (1) to use a fresh database.
 ```
 ./setup.sh
 ```
 
-6. Run the interactive command line interface in the project directory. Run as follows. Note that the permissions database will be persisted over time. 
+6. Run the interactive command line interface in the project directory. Run as follows.
 ```
 ./gaap_run.sh
 ```
