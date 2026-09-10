@@ -43,12 +43,7 @@ export GEMINI_API_KEY="<add-key-here>"
 ./setup.sh
 ```
 
-6. Activate environment.
-```
-source env/bin/activate
-```
-
-7. Run the interactive command line interface in the project directory. Run as follows. Note that the permissions database will be persisted over time. 
+6. Run the interactive command line interface in the project directory. Run as follows. Note that the permissions database will be persisted over time. 
 ```
 ./gaap_run.sh
 ```
