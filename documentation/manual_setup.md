@@ -13,17 +13,10 @@ sqlite3 queries_4.db < operation_helpers/QueriesSchema.sql
 3. Make copies of needed files from templates for your local instance. The second command sets a copy of a baseline private data database with some values inside. If you want a fresh private data database, run the third command instead. 
 ```
 cp agent_helpers/database_template.py agent_helpers/database.py
-cp privateData_template.db privateData.db
+cp privateData_template_filled.db privateData.db
 # or, for a fresh database,
-sqlite3 privateData.db < agent_helpers/DataSchema.sql
+cp privateData_template.db privateData.db
 ```
-  
-4. Make a python environment `env`. Activate the environment. Then run the following. 
-```
-pip install pyre-check
-```
-
-5. Inside the project directory, create an empty directory for `taint_sources` and for `editable_files`. Insert any files you want the system to interact with into `editable_files`.
 
 6. Run the interactive command line interface. Run as follows. Note that the permissions database will be persisted over time. 
 ```
