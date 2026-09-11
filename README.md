@@ -64,7 +64,7 @@ GAAP currently has built-in servers for checking weather, converting time, mock 
 
 1. Ask the agent `Email my phone number to Mallory using server email`. We specify the server because we have [two email servers](documentation/email_instructions.md) in the system by default. Note that this prompt does not contain sensitive values, as GAAP requires sensitive private data is not given directly in prompts. 
    
-2. Because the system has no information to begin, it will need to ask you for some values to complete this request. These values will be persisted in the future in the private data database. The agent should request your phone number and Mallory's email address. You can give `1234567890` as phone number and `mallory@example.com` as Mallory's email. Also, GAAP may ask to share these values with `mallory@example.com` using the `send_email` tool. During this stage, the LLM generates a plan of actions that may differ between runs. As a result, these requests for data and permissions may come in different orderings. 
+2. Because the system has no information to begin, it will need to ask you for some values to complete this request. These values will be persisted in the future in the private data database. The agent should request your phone number and Mallory's email address. You can give `1234567890` as phone number and `mallory@example.com` as Mallory's email. Also, GAAP may ask to share these values with `mallory@example.com` using the `send_email` tool, and you should say `"yes"` to approve these requests, as it is expected these permissions are needed for this task. During this stage, the LLM generates a plan of actions that may differ between runs. As a result, these requests for data and permissions may come in different orderings. 
 
 3. After this, the email to Mallory should get sent. If you deny any of the requested permissions, the email will not be sent. 
 
@@ -72,4 +72,4 @@ GAAP currently has built-in servers for checking weather, converting time, mock 
 
 5. If you'd like to retry the example task, the permissions you have granted will be persisted. So, use the `/remove_permissions` tool inside the GAAP chat to remove permissions before retrying. 
  
-We provide some additional [example use cases](documentation/examples.md) to try with GAAP. 
+We provide [example use cases](documentation/examples.md) to try with GAAP. 
