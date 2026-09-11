@@ -36,22 +36,19 @@ export OPENAI_API_KEY="<add-key-here>"
 export GEMINI_API_KEY="<add-key-here>"
 ```
 
-4. Open `config.py`, and set parameters as desired. You can determine if you would like to use local (OLlama) or remote (OpenAI or Google), and what model you would prefer. 
+4. Define model provider and name in `config.py`, You can determine if you would like to use local (OLlama) or remote (OpenAI or Google), and what model you would prefer. We recommend a relatively large LLM (such as `GPT-5.6-Sol`) for the highest task completion rate, particularly for more complex tasks. Other LLMs (such as `GPT-5.6-Terra`) are capable of operating under GAAP, but may see lower task completion rates for complex tasks. Other configurations can be left at their default. 
 
-5. Execute setup script in the project directory. This setup script will make a single call to your configured LLM to test operationality. You may be prompted how you want to initialize `privateData.db`. If you initialize fresh, it will have no private data to begin. If you initialize with a template, it will have example user private data contained inside. 
+5. Execute setup script in the project directory. **This setup script will make a single API call to your configured LLM to test operationally, which will use a small number of tokens. This step may take up to two minutes, depending on the speed of your chosen LLM.** You may be prompted how you want to initialize `privateData.db`. We recommend the default (1) to use a fresh database.
 ```
 ./setup.sh
 ```
 
-6. Activate environment.
-```
-source env/bin/activate
-```
-
-7. Run the interactive command line interface in the project directory. Run as follows. Note that the permissions database will be persisted over time. 
+6. Run the interactive command line interface in the project directory. Run as follows.
 ```
 ./gaap_run.sh
 ```
+
+7. We recommend you begin with the example task listed below. After that, we invite you to explore what you can achieve with GAAP. 
 
 ### Manual Setup
 
@@ -63,26 +60,16 @@ All of the steps in the setup, including those wrapped into `setup.sh` are liste
 
 GAAP currently has built-in servers for checking weather, converting time, mock email sending, real Gmail email sending, ordering food in a mock restaurant, filesystem operations, checking internet utilities, Wikipedia, and medical conversions. Full tool listings and specifications are available in [`all_servers.json`](all_servers.json). We provide further [details about the email servers](documentation/email_instructions.md).  
 
-### Example Uses
+### Example Task
 
-Each example can run starting with a blank database, or the examples can be completed in sequence.  
+1. Ask the agent `Email my phone number to Mallory using server email`. We specify the server because we have [two email servers](documentation/email_instructions.md) in the system by default. Note that this prompt does not contain sensitive values, as GAAP requires sensitive private data is not given directly in prompts. 
+   
+2. Because the system has no information to begin, it will need to ask you for some values to complete this request. These values will be persisted in the future in the private data database. The agent should request your phone number and Mallory's email address. You can give `1234567890` as phone number and `mallory@example.com` as Mallory's email. Also, GAAP may ask to share these values with `mallory@example.com` using the `send_email` tool. During this stage, the LLM generates a plan of actions that may differ between runs. As a result, these requests for data and permissions may come in different orderings. 
 
-#### Email Phone Number
+3. After this, the email to Mallory should get sent. If you deny any of the requested permissions, the email will not be sent. 
 
-1. Use the command `/private_data` to add a phone number into the database. This is the manual modification method. 
+4. The email should get sent. Use the `/check_queries` tool inside of the GAAP chat to view "requests". Look at the latest 3 requests. One should contain an email sent to Mallory.
 
-2. Ask the agent `Email my phone number to Mallory using server email`. We specify the server so that it does not user server [`email_real`](documentation/email_instructions.md) to send a real email. The agent should request Mallory's email address, your email address, and your email password. You can choose Mallory's email address. Use `alice@example.com` and `password` for your email and password. 
-
-3. The email should get sent. Use `/check_queries` to view "requests". Look at the latest 3 requests. One should contain an email sent to Mallory. 
-
-#### Tracking Through File
-
-1. Ask the agent `Write my salary into a file salary.txt`. Give a value for salary when prompted, such as `12345`. 
-
-2. Run the `/clear_context` command, or `/exit` the agent and relaunch with `./gaap_run.sh`. 
-
-3. Ask the agent `Email the file salary.txt to Mallory with server email`. The GAAP prompt should ask if you want to send your salary to Mallory, indicating the taint was carried through the file over time. 
+5. If you'd like to retry the example task, the permissions you have granted will be persisted. So, use the `/remove_permissions` tool inside the GAAP chat to remove permissions before retrying. 
  
 We provide some additional [example use cases](documentation/examples.md) to try with GAAP. 
-
-
