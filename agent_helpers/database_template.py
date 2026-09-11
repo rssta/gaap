@@ -15,6 +15,7 @@ from google import genai
 from google.genai import types
 import logging
 import transformers
+import config
 
 INDEX_FILE = "faiss_index.bin"
 ISA_METADATA_FILE = "ISA_metadata.pkl"
@@ -22,9 +23,6 @@ ISA_PERMISSION = True
 
 NEW_DATA_INSERT = False
 DB_ADD_PKL = "database_additions.pkl"
-
-import os
-import logging
 
 # Disable Hugging Face & Transformers progress bars globally
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
@@ -507,7 +505,7 @@ def request_data_from_user(new_key: str, try_isa = False):
 
     # ISA call
     accept_isa_value = "no"
-    if try_isa == True:
+    if try_isa == True and config.use_ISA:
         isa_output = information_seeking_agent(new_key)
     else:
         isa_output = ""
@@ -587,6 +585,8 @@ def check_for_permission(keyword: str, permission_server: str, permission_tool: 
                 select_query = 'SELECT * FROM permissions WHERE data_id = ? AND permission_tool = ? AND permission_extra_information = ?'
                 result = cursor.execute(select_query, (needed_id, "llm_extension:qllm_call", "qllm1", ))
                 result_permissions = result.fetchall()
+            if config.check_llm_permissions == False:
+                return 'true'
         elif "default" not in permission_type:
             permission_extra_information_use = permission_extra_information[0]
             select_query = 'SELECT * FROM permissions WHERE data_id = ? AND permission_tool = ? AND permission_extra_information = ?'
@@ -834,19 +834,22 @@ def request_multiple_permissions_from_user(keywords, permission_server, permissi
             return True
         else:
 
-            follow_up_to_user = f"\033[32m  GAAP:\033[0m\tWould you like to set all permissions to false or custom per keyword?"
-            print(follow_up_to_user)
-            with open("counting_metrics.pkl", "rb") as file:
-                user_interactions, actual_user_interactions, mcp_calls = pickle.load(file)
-            user_interactions += 1
-            actual_user_interactions += 1
-            with open("counting_metrics.pkl", "wb") as file:
-                pickle.dump([user_interactions, actual_user_interactions, mcp_calls], file)
-            if bypass == "no":
-                print('\033[32m  GAAP:\033[0m\tEnter "false", "custom", or "skip": ', end="")
-                user_input = input()
-            else: # should never happen, because we always say yes anyway
-                user_input = "false"
+            if config.denial_choice in ['false', 'true', 'skip']:
+                user_input = config.denial_choice
+            else:
+                follow_up_to_user = f"\033[32m  GAAP:\033[0m\tWould you like to set all permissions to false or custom per keyword?"
+                print(follow_up_to_user)
+                with open("counting_metrics.pkl", "rb") as file:
+                    user_interactions, actual_user_interactions, mcp_calls = pickle.load(file)
+                user_interactions += 1
+                actual_user_interactions += 1
+                with open("counting_metrics.pkl", "wb") as file:
+                    pickle.dump([user_interactions, actual_user_interactions, mcp_calls], file)
+                if bypass == "no":
+                    print('\033[32m  GAAP:\033[0m\tEnter "false", "custom", or "skip": ', end="")
+                    user_input = input()
+                else: # should never happen, because we always say yes anyway
+                    user_input = "false"
 
             if user_input == "false":
 

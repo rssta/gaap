@@ -98,7 +98,7 @@ mkdir -p later_runs
 # -------------------------------------------------------------------------
 # Step 9: Verify LLM API Status
 # -------------------------------------------------------------------------
-echo "Running initial API test..."
+echo "Running initial API test... (this step makes a single API request using a small number of tokens, and may take seconds to a couple of minutes)"
 if ! uv run -q external_modifications/initial_api_test.py; then
     echo -e "${RED}[Error]${NC} The LLM may not be working right." >&2
 fi
