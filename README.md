@@ -28,7 +28,7 @@ https://github.com/user-attachments/assets/4ce35ea8-f1a6-4a7c-8c0f-253ba7914eb6
 
 1. Clone repository. 
 
-2. Be sure that [UV](https://docs.astral.sh/uv/) and [SQLite](https://sqlite.org/index.html) are installed. 
+2. Be sure that [UV](https://docs.astral.sh/uv/) and [SQLite](https://sqlite.org/index.html) (with your preferred package manager) are installed. 
 
 3. Set environment variables in terminal. Set the API key for the service you intend to use. No API key is needed if using local (OLlama) models.
 ```
@@ -36,7 +36,7 @@ export OPENAI_API_KEY="<add-key-here>"
 export GEMINI_API_KEY="<add-key-here>"
 ```
 
-4. Define model provider and name in `config.py`, You can determine if you would like to use local (OLlama) or remote (OpenAI or Google), and what model you would prefer. We recommend a relatively large LLM (such as `GPT-5.6-Sol`) for the highest task completion rate, particularly for more complex tasks. Other LLMs (such as `GPT-5.6-Terra`) are capable of operating under GAAP, but may see lower task completion rates for complex tasks. Other configurations can be left at their default. 
+4. Set your model provider and model name in `config.py`. You can determine if you would like to use local (OLlama) or remote (OpenAI or Google), and what model you would prefer. We recommend a relatively large LLM (such as `GPT-5.6-Sol`) for the highest task completion rate, particularly for more complex tasks. Other LLMs (such as `GPT-5.6-Terra`) are capable of operating under GAAP, but may see lower task completion rates for complex tasks. Other configurations can be left at their default. 
 
 5. Execute setup script in the project directory. **This setup script will make a single API call to your configured LLM to test operationally, which will use a small number of tokens. This step may take up to two minutes, depending on the speed of your chosen LLM.** You may be prompted how you want to initialize `privateData.db`. We recommend the default (1) to use a fresh database.
 ```
