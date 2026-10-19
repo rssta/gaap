@@ -20,7 +20,7 @@ Find details about the concept of GAAP on [ArXiv](https://arxiv.org/abs/2604.196
 
 Below is a demonstration of GAAP in action. We see that the user has a file [`poem.txt`](documentation/poem.txt). This file contains words, along with a prompt injection. The user asks the agent to read the file, putting the untrusted content of the file into the agent context. As a result, the agent attempts an unintended action of sending a file `important_plans.txt` to an external email address. GAAP detects this action, and because the user has not given permission for this action prior, it prompts the user, and the user declines. 
 
-https://github.com/user-attachments/assets/4ce35ea8-f1a6-4a7c-8c0f-253ba7914eb6
+https://github.com/user-attachments/assets/df595340-9b49-4727-8c0f-ba510ee03121
 
 ## Setup
 
